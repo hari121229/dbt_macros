@@ -5,9 +5,9 @@
 {% macro data_profiling(target_database,target_schema,exclude_columns) %}
 
     -- Configure the destination detailsss
-    {%- set snowflake_database   = 'dbt_learning' -%}
-    {%- set snowflake_schema     = 'orderdetils' -%}
-    {%- set snowflake_tables     = target_database -%}
+    {%- set snowflake_database   = 'transforming_data' -%}
+    {%- set snowflake_schema     = 'transforming' -%}
+    {%- set snowflake_tables     = 'data_profiling' -%}
 
     {%- set source_details  =  [[ target_database[0], target_schema, exclude_columns]] -%}
 
@@ -18,19 +18,19 @@
         {% set profiled_at = run_query(get_current_timestamp).columns[0].values()[0] %}
     {% endif %}
     {%- set schema_create -%}
-        {{ create_new_schema(snowflake_database, snowflake_schema) }}
+        {{ data_quality.create_new_schema(snowflake_database, snowflake_schema) }}
     {%- endset -%}
     {% do run_query(schema_create) %}
     -- Iterate through the layer
     {%- for snowflake_table in snowflake_tables -%}
         -- Create the table in snowflake if not exists
         {%- set create_table -%}
-            {{ create_data_profiling_table(snowflake_database, snowflake_schema, snowflake_table) }}
+            {{ data_quality.create_data_profiling_table(snowflake_database, snowflake_schema, snowflake_table) }}
         {%- endset -%}
         {% do run_query(create_table) %}
         -- Read the table names from information schema for that particular layer
         {%- set read_information_schema_datas -%}
-            {{ read_information_schema(source_details[loop.index-1][0], source_details[loop.index-1][1], source_details[loop.index-1][2]) }}
+            {{ data_quality.read_information_schema(source_details[loop.index-1][0], source_details[loop.index-1][1], source_details[loop.index-1][2]) }}
         {%- endset -%}
         {% set information_schema_datas = run_query(read_information_schema_datas) %}
         -- This loop is used to itetrate the tables in layer
@@ -45,7 +45,7 @@
                     {%- set insert_rows -%}
                         INSERT INTO {{ snowflake_database }}.{{ snowflake_schema }}.{{ snowflake_table }} (
                                 {%- for chunk_column in chunk_columns -%}
-                                    {{ do_data_profiling(information_schema_data, source_table_name, chunk_column, profiled_at) }}
+                                    {{ data_quality.do_data_profiling(information_schema_data, source_table_name, chunk_column, profiled_at) }}
                                     {% if not loop.last %} UNION ALL {% endif %}
                                 {%- endfor -%}
                             )
@@ -59,7 +59,7 @@
                 {%- set insert_rows -%}
                     INSERT INTO {{ snowflake_database }}.{{ snowflake_schema }}.{{ snowflake_table }} (
                             {%- for chunk_column in chunk_columns -%}
-                                {{ do_data_profiling(information_schema_data, source_table_name, chunk_column, profiled_at) }}
+                                {{ data_quality.do_data_profiling(information_schema_data, source_table_name, chunk_column, profiled_at) }}
                                 {% if not loop.last %} UNION ALL {% endif %}
                             {%- endfor -%}
                         )

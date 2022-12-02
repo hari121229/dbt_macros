@@ -73,17 +73,17 @@
         , COUNT(DISTINCT IFF({{ adapter.quote(chunk_column["column"]) }}::VARCHAR = '', NULL, {{ adapter.quote(chunk_column["column"]) }}))                                                      AS distinct_count
         , ROUND((COUNT(DISTINCT IFF({{ adapter.quote(chunk_column["column"]) }}::VARCHAR = '', NULL, {{ adapter.quote(chunk_column["column"]) }})) / CAST(COUNT(*) AS NUMERIC)) * 100, 2)        AS distinct_percent
         , COUNT(DISTINCT IFF({{ adapter.quote(chunk_column["column"]) }}::VARCHAR = '', NULL, {{ adapter.quote(chunk_column["column"]) }})) = COUNT(*)                                           AS is_unique
-        , {% if is_numeric_dtype((chunk_column["dtype"]).lower()) or is_date_or_time_dtype((chunk_column["dtype"]).lower()) %}
+        , {% if data_quality.is_numeric_dtype((chunk_column["dtype"]).lower()) or data_quality.is_date_or_time_dtype((chunk_column["dtype"]).lower()) %}
             CAST(MIN({{ adapter.quote(chunk_column["column"]) }}) AS VARCHAR)
         {% else %}
             NULL
         {% endif %}   AS min
-        , {% if is_numeric_dtype((chunk_column["dtype"]).lower()) or is_date_or_time_dtype((chunk_column["dtype"]).lower()) %}
+        , {% if data_quality.is_numeric_dtype((chunk_column["dtype"]).lower()) or data_quality.is_date_or_time_dtype((chunk_column["dtype"]).lower()) %}
             CAST(MAX({{ adapter.quote(chunk_column["column"]) }}) AS VARCHAR)
         {% else %}
             NULL
         {% endif %}   AS max
-        , {% if is_numeric_dtype((chunk_column["dtype"]).lower()) %}
+        , {% if data_quality.is_numeric_dtype((chunk_column["dtype"]).lower()) %}
             ROUND(AVG({{ adapter.quote(chunk_column["column"]) }}), 2)
         {% else %}
             CAST(NULL AS NUMERIC)
