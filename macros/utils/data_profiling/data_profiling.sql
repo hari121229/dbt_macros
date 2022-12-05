@@ -2,12 +2,12 @@
     CREATE SCHEMA IF NOT EXISTS {{ db_name }}.{{ schema_name }}
 {%- endmacro -%}
 
-{% macro data_profiling(target_database,target_schema,exclude_columns) %}
+{% macro data_profiling(target_database,target_schema,exclude_columns,destination_database,destination_schema,destination_table) %}
 
     -- Configure the destination detailsss
-    {%- set snowflake_database   = 'transforming_data' -%}
-    {%- set snowflake_schema     = 'transforming' -%}
-    {%- set snowflake_tables     = 'data_profiling' -%}
+    {%- set snowflake_database   = destination_database[0]-%}
+    {%- set snowflake_schema     = destination_schema[0] -%}
+    {%- set snowflake_tables     = destination_table -%}
 
     {%- set source_details  =  [[ target_database[0], target_schema, exclude_columns]] -%}
 
