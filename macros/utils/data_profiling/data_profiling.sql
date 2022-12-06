@@ -5,8 +5,6 @@
 {% macro data_profiling(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table) %}
 
 {% if (flags.WHICH).upper() == 'RUN' %}
-
-
     -- Configure the destination detailsss
     {%- set snowflake_database   = destination_database-%}
     {%- set snowflake_schema     = destination_schema -%}
