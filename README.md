@@ -38,25 +38,6 @@ For the third point there are at least two options:
 `dbt-profiler` requires - git: https://github.com/hari121229/dbt_macros_hub.git
                           revision: v1.0.5 
 
-## Supported adapters
-
-`dbt-profiler` may work with unsupported adapters but they haven't been tested yet. If you've used `dbt-profiler` with any of the unsupported adapters I'd love to hear your feedback (e.g., create an issue, PR or hit me with with a DM on [dbt Slack](https://community.getdbt.com/)) 😊
-
-✅ PostgreSQL
-
-✅ BigQuery
-
-✅ Snowflake
-
-✅ Redshift
-
-✅ Databricks
-
-✅ SQL Server
-
-❌ Apache Spark
-
-❌ Presto
 
 # Macros
 
@@ -82,5 +63,5 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 }}
 
 
-{{ data_quality.data_profiling('snowflake_sample_data',['tpch_sf1'],[],['orders'],'transforming_data','transforming','data_profile_table')}}
+{{ data_quality.data_profiling('source_database',['source_schema'],['include_tables],['exclude_tables'],'destination_database','destination_schema','destination_table')}}
 ```
