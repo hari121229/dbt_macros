@@ -2,14 +2,17 @@
     CREATE SCHEMA IF NOT EXISTS {{ db_name }}.{{ schema_name }}
 {%- endmacro -%}
 
-{% macro data_profiling(target_database,target_schema,exclude_columns,destination_database,destination_schema,destination_table) %}
+{% macro data_profiling(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table) %}
+
+{% if (flags.WHICH).upper() == 'RUN' %}
+
 
     -- Configure the destination detailsss
-    {%- set snowflake_database   = destination_database[0]-%}
-    {%- set snowflake_schema     = destination_schema[0] -%}
-    {%- set snowflake_tables     = destination_table -%}
+    {%- set snowflake_database   = destination_database-%}
+    {%- set snowflake_schema     = destination_schema -%}
+    {%- set snowflake_tables     = [destination_table] -%}
 
-    {%- set source_details  =  [[ target_database[0], target_schema, exclude_columns]] -%}
+    {%- set source_details  =  [[ target_database, target_schema, exclude_tables, include_tables ]] -%}
 
     {% set get_current_timestamp %}
         SELECT CONVERT_TIMEZONE('UTC', CURRENT_TIMESTAMP()) AS utc_time_zone
@@ -30,7 +33,7 @@
         {% do run_query(create_table) %}
         -- Read the table names from information schema for that particular layer
         {%- set read_information_schema_datas -%}
-            {{ data_quality.read_information_schema(source_details[loop.index-1][0], source_details[loop.index-1][1], source_details[loop.index-1][2]) }}
+            {{ data_quality.read_information_schema(source_details[loop.index-1][0], source_details[loop.index-1][1], source_details[loop.index-1][2], source_details[loop.index-1][3]) }}
         {%- endset -%}
         {% set information_schema_datas = run_query(read_information_schema_datas) %}
         -- This loop is used to itetrate the tables in layer
@@ -69,6 +72,7 @@
             {%- endif -%}
         {%- endfor %}
     {%- endfor %}
+{% endif %}
 
     SELECT 'TEMP_STORAGE' AS temp_column
 {% endmacro %}

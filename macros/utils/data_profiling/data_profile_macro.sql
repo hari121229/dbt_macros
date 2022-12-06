@@ -30,7 +30,7 @@
     )
 {%- endmacro -%}
 -- Read the data from information schema based on the parameters
-{%- macro read_information_schema(db_name, profiling_schemas, exclude_tables=[]) -%}
+{%- macro read_information_schema(db_name, profiling_schemas, exclude_tables=[],include_tables=[]) -%}
     SELECT
         table_catalog           AS table_database
         , table_schema
@@ -46,7 +46,18 @@
                                     '{{ exclude_table.upper() }}'
                                     {%- if not loop.last -%} , {% endif -%}
                                 {%- endfor -%} )
+        
+         {% elif include_tables != [] %}
+            AND table_name IN ( {%- for include_table in include_tables -%}
+                                    '{{ include_table.upper() }}'
+                                    {%- if not loop.last -%} , {% endif -%}
+                                {%- endfor -%} )
+        {% else %}
+
+            AND 1 = 1
+        
         {% endif %}
+
     ORDER BY table_schema, table_name
 {%- endmacro -%}
 -- Get the profiling details for the column
