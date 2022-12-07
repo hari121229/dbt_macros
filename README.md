@@ -66,3 +66,5 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 
 {{ data_quality.data_profiling('source_database',['source_schema'],['include_tables],['exclude_tables'],'destination_database','destination_schema','destination_table')}}
 ```
+### Example Output
+
