@@ -68,10 +68,16 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 ```
 ### Example Output
 
-| column_name             | data_type | not_null_proportion | distinct_proportion | distinct_count | is_unique | min        | max        |                 avg |  std_dev_population |      std_dev_sample | profiled_at                   |
-| ----------------------- | --------- | ------------------- | ------------------- | -------------- | --------- | ---------- | ---------- | ------------------- | ------------------- | ------------------- | ----------------------------- |
-| customer_id             | int64     |                1.00 |                1.00 |            100 |         1 | 1          | 100        | 50.5000000000000000 | 28.8660700477221200 | 29.0114919758820200 | 2022-01-13 10:14:48.300040+00 |
-| first_order             | date      |                0.62 |                0.46 |             46 |         0 | 2018-01-01 | 2018-04-07 |                     |                     |                     | 2022-01-13 10:14:48.300040+00 |
-| most_recent_order       | date      |                0.62 |                0.52 |             52 |         0 | 2018-01-09 | 2018-04-09 |                     |                     |                     | 2022-01-13 10:14:48.300040+00 |
-| number_of_orders        | int64     |                0.62 |                0.04 |              4 |         0 | 1          | 5          |  1.5967741935483863 |  0.7716692718648833 |  0.7779687173818426 | 2022-01-13 10:14:48.300040+00 |
-| customer_lifetime_value | float64   |                0.62 |                0.35 |             35 |         0 | 1          | 99         | 26.9677419354838830 | 18.6599171435558730 | 18.8122455252636630 | 2022-01-13 10:14:48.300040+00 |
+
+
+|    DATABASE           | SCHEMA | TABLE_NAME | COLUMN_NAME         | DATA_TYPE | ROW_COUNT | NOT_NULL_COUNT | NULL_COUNT | NOT_NULL_PERCENTAGE| NULL_PERCENTAGE | DISTINCT_COUNT | DISTINCT_PERCENT |IS_UNIQUE | MIN      | MAX 	|    AVG 	   |      PROFILED_AT 		|
+| ----------------------| -------| -----------|-------------------- | ----------|---------- | -------------- | ---------  | ------------------ | --------------- | -------------- | -----------------| -------- | ---------|------------|------------------|--------------------------- |
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_ORDERKEY          | NUMBER    |1500000    |1500000         |	0	  | 100.00     	       |0.00		 |1500000         |100.00	     |TRUE	|1         |6000000     |2999991.50        |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_CUSTKEY           | NUMBER	|1500000    |1500000         |	0         | 100.00     	       |0.00		 |99996		  |6.67		     |FALSE	|1    	   |149999      |75006.04          |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_ORDERSTATUS       | VARCHAR	|1500000    |1500000         |	0         | 100.00             |0.00		 |3               |0.00		     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_TOTALPRICE        | NUMBER	|1500000    |1500000	     |	0         | 100.00             |0.00		 |1464556	  |97.64 	     |FALSE	|857.71    |555285.16   |151219.54         |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_ORDERDATE         | DATE	|1500000    |1500000         |	0         | 100.00             |0.00		 |2406		  |0.16		     |FALSE	|1992-01-01|1998-08-02  |                  |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_ORDERPRIORITY     | VARCHAR	|1500000    |1500000         |	0         | 100.00	       |0.00		 |5     	  |0.00		     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_CLERK             | VARCHAR	|1500000    |1500000         |	0         | 100.00             |0.00		 |1000		  |0.07   	     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_SHIPPRIORITY      | NUMBER	|1500000    |1500000         |	0         | 100.00             |0.00		 |1		  |0.00		     |FALSE	|0         |0           |0.00              |2022-12-06T09:05:18.183Z	|
+|SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_COMMENT           | VARCHAR	|1500000    |1500000         |	0         | 100.00             |0.00		 |1482071         |98.80	     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
