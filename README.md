@@ -11,7 +11,7 @@
 * `not_null_count`: Count the not_null values by column based
 * `null_count`: Count the null values by column based.
 * `not_null_percentage`: Percentage of column values that are not `NULL` (e.g., `0.62` means that 62% of the values are populated while 38% are `NULL`)
-* `null_percentage`: Percentage of column values that are not `NOT_NULL` (e.g., `0.55` means that 55% of the values are populated while 48% are `NOT_NULL`)
+* `null_percentage`: Percentage of column values that are not `NOT_NULL` (e.g., `0.55` means that 55% of the values are populated while 45% are `NOT_NULL`)
 * `distinct_percentage`: Percentage of unique column values (e.g., `1` means that 100% of the values are unique)
 * `distinct_count`: Count of unique column values
 * `is_unique`: True if all column values are unique
