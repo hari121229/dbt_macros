@@ -36,8 +36,8 @@ so that we could modify the package for processing more than 1000 columns.
  Include the following in your packages.yml file:
 ```sql
 packages:
-  - git: **https://github.com/hari121229/dbt_macros_hub.git**
-    revision: **v1.0.5**
+  - git: https://github.com/hari121229/dbt_macros_hub.git
+    revision: v1.0.5
 ```
 
 ## Supported adapters
