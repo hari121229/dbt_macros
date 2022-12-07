@@ -59,6 +59,7 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 * `destination_schema` (required): Mention the destination table name.
 * `destination_table` (required): Mention the destination table name.
 ### Usage
+Use this macro in a dbt model, 
 
 ```sql
 {{
