@@ -17,10 +17,6 @@
 * `avg`: Average column value
 * `profiled_at`: Profile calculation date and time
 
-`*` numeric, date and time columns only
-`**` numeric columns only
-`^` can be excluded from the profile using `exclude_measures` argument
-
 ## Purpose 
 
 `dbt-profiler` aims to provide the following:
