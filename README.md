@@ -72,8 +72,7 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 ```
 ### Example Output
 
-
-
+```
 |    DATABASE           | SCHEMA | TABLE_NAME | COLUMN_NAME         | DATA_TYPE | ROW_COUNT | NOT_NULL_COUNT | NULL_COUNT | NOT_NULL_PERCENTAGE| NULL_PERCENTAGE | DISTINCT_COUNT | DISTINCT_PERCENT |IS_UNIQUE | MIN      | MAX 	|    AVG 	   |      PROFILED_AT 		|
 | ----------------------| -------| -----------|-------------------- | ----------|---------- | -------------- | ---------  | ------------------ | --------------- | -------------- | -----------------| -------- | ---------|------------|------------------|--------------------------- |
 |SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_ORDERKEY          | NUMBER    |1500000    |1500000         |	0	  | 100.00     	       |0.00		 |1500000         |100.00	     |TRUE	|1         |6000000     |2999991.50        |2022-12-06T09:05:18.183Z	|
@@ -85,3 +84,4 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 |SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_CLERK             | VARCHAR	|1500000    |1500000         |	0         | 100.00             |0.00		 |1000		  |0.07   	     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
 |SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_SHIPPRIORITY      | NUMBER	|1500000    |1500000         |	0         | 100.00             |0.00		 |1		  |0.00		     |FALSE	|0         |0           |0.00              |2022-12-06T09:05:18.183Z	|
 |SNOWFLAKE_SAMPLE_DATA  |TPCH_SF1| ORDERS     | O_COMMENT           | VARCHAR	|1500000    |1500000         |	0         | 100.00             |0.00		 |1482071         |98.80	     |FALSE	|          |            |                  |2022-12-06T09:05:18.183Z	|
+```
