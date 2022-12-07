@@ -8,13 +8,13 @@
 * `row_count`: Column based row count
 * `column_name`: Name of the column
 * `data_type`: Data type of the column
-* `not_null_proportion`^: Proportion of column values that are not `NULL` (e.g., `0.62` means that 62% of the values are populated while 38% are `NULL`)
-* `distinct_proportion`^: Proportion of unique column values (e.g., `1` means that 100% of the values are unique)
-* `distinct_count`^: Count of unique column values
-* `is_unique`^: True if all column values are unique
-* `min`*^: Minimum column value
-* `max`*^: Maximum column value
-* `avg`**^: Average column value
+* `not_null_proportion`: Proportion of column values that are not `NULL` (e.g., `0.62` means that 62% of the values are populated while 38% are `NULL`)
+* `distinct_proportion`: Proportion of unique column values (e.g., `1` means that 100% of the values are unique)
+* `distinct_count`: Count of unique column values
+* `is_unique`: True if all column values are unique
+* `min`: Minimum column value
+* `max`: Maximum column value
+* `avg`: Average column value
 * `profiled_at`: Profile calculation date and time
 
 `*` numeric, date and time columns only
