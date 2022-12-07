@@ -1,6 +1,6 @@
 # dbt-profiler
 The dbt_profiling package is inspired from [dbt hub](https://hub.getdbt.com/data-mie/dbt_profiler/latest/).
-That is package processed only 150 columns for data profiling.
+That package is processed only 150 columns for data profiling.
 If we had more than 150, it wouldn't work.
 so that we could modify the package for processing more than 1000 columns.
 
