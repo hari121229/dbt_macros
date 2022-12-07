@@ -33,6 +33,10 @@ packages:
     revision: v1.0.5 
 ```
 
+## Supported adapters
+
+✅ Snowflake
+
 # Macros
 
 ## data_profile ([source](macros/get_profile.sql))
