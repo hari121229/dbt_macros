@@ -43,8 +43,8 @@ This macro returns a relation profile as a SQL query that can be used in a dbt m
 ### Arguments
 * `source_database` (required): Mention the source table name.
 * `source_schema` (required): Mention the source schema name
-* `include_tables` (required): List of columns to include in the profile (default: `[]` i.e., all). Only one of `include_tables` and `include_table` can be specified at a time.
-* `exclude_tables` (required): List of columns to exclude from the profile (default: `[]`). Only one of `include_tables` and `exclude_tables` can be specified at a time.
+* `include_tables` (optional): List of columns to include in the profile (default: `[]` i.e., all). Only one of `include_tables` and `include_table` can be specified at a time.
+* `exclude_tables` (optional): List of columns to exclude from the profile (default: `[]`). Only one of `include_tables` and `exclude_tables` can be specified at a time.
 * `destination_database` (required): Mention the destination table name.
 * `destination_schema` (required): Mention the destination table name.
 * `destination_table` (required): Mention the destination table name.
