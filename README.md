@@ -1,4 +1,8 @@
 # dbt-profiler
+The dbt_profiling package is inspired by dbt_hub.
+Only 150 columns are processed by the dbt_profiler packages.
+If we had more than 150, it wouldn't work.
+so that we could modify the package for processing more than 1000 columns.
 
 `dbt-profiler` implements dbt macros for profiling database relations and creating  `doc` blocks and table schemas (`schema.yml`) containing said profiles. A calculated profile contains the following measures for each column in a relation:
 
