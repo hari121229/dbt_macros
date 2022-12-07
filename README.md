@@ -29,8 +29,8 @@
 2. Describe a mechanism to include model profiles in [dbt docs](https://docs.getdbt.com/docs/building-a-dbt-project/documentation)
 
 ## Installation
-dbt version required: >=1.1.0
-Include the following in your packages.yml file:
+`dbt version required: >=1.1.0.`
+`Include the following in your packages.yml file:`
 ```sql
 packages:
   - git: https://github.com/hari121229/dbt_macros_hub.git
