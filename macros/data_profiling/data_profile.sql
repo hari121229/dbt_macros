@@ -15,7 +15,7 @@
     {%- set source_details  =  [[ target_database, target_schema, exclude_tables, include_tables ]] -%}
 
     {% set get_current_timestamp %}
-        SELECT CONVERT_TIMEZONE('UTC', CURRENT_TIMESTAMP()) AS utc_time_zone
+        SELECT {{ current_timestamp_utc() }} AS utc_time_zone
     {% endset %}
     {% if execute %}
         {% set profiled_at = run_query(get_current_timestamp).columns[0].values()[0] %}
