@@ -4,7 +4,11 @@
     CREATE SCHEMA IF NOT EXISTS {{ db_name }}.{{ schema_name }}
 {%- endmacro -%}
 
-{% macro data_profiling(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table) %}
+{% macro data_profiling(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table) -%}
+  {{ return(adapter.dispatch('data_profiling')(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table)) }}
+{%- endmacro %}
+
+{% macro snowflake__data_profiling(target_database, target_schema, exclude_tables, include_tables, destination_database, destination_schema, destination_table) %}
 
 {% if (flags.WHICH).upper() == 'RUN' %}
     -- Configure the destination details
@@ -15,7 +19,7 @@
     {%- set source_details  =  [[ target_database, target_schema, exclude_tables, include_tables ]] -%}
 
     {% set get_current_timestamp %}
-        SELECT {{ current_timestamp_utc() }} AS utc_time_zone
+        SELECT CONVERT_TIMEZONE('UTC', CURRENT_TIMESTAMP()) AS utc_time_zone
     {% endset %}
     {% if execute %}
         {% set profiled_at = run_query(get_current_timestamp).columns[0].values()[0] %}
