@@ -14,6 +14,9 @@ profile: 'data_quality'
 # found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
@@ -27,4 +30,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   data_quality:
- 
+
+seeds:
+  data_quality:
+    test_data:
+      schema: test
+    demo_data:
+      schema: demo
